@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0">
+
+<title>Your Cart — BookNest</title>
+
+<link
+href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@500;600;700&display=swap"
+rel="stylesheet">
+
+<link
+rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+<link rel="stylesheet"
+href="css/style.css">
+
+</head>
+
+<body>
+
+<header class="header">
+
+<a href="index.html" class="logo">
+<i class="fa-solid fa-book-open"></i>
+BookNest
+</a>
+
+<nav class="navbar">
+
+<a href="index.html">Home</a>
+<a href="index.html#books">Books</a>
+<a href="index.html#categories">Categories</a>
+
+</nav>
+
+<a href="login.html"
+class="icon-btn">
+
+<i class="fa-regular fa-user"></i>
+
+</a>
+
+</header>
+
+
+<main class="page-container">
+
+<div class="page-title">
+
+<span class="eyebrow">
+YOUR SHOPPING BAG
+</span>
+
+<h1>
+Your <em>Cart</em>
+</h1>
+
+</div>
+
+
+<div class="cart-layout">
+
+<div id="cartItems">
+
+</div>
+
+
+<aside class="cart-summary">
+
+<h2>
+Order Summary
+</h2>
+
+<div class="summary-row">
+
+<span>Subtotal</span>
+
+<strong id="subtotal">
+₹0
+</strong>
+
+</div>
+
+<div class="summary-row">
+
+<span>Delivery</span>
+
+<strong>
+FREE
+</strong>
+
+</div>
+
+<hr>
+
+<div class="summary-total">
+
+<span>Total</span>
+
+<strong id="total">
+₹0
+</strong>
+
+</div>
+
+<a href="checkout.html"
+id="checkoutButton"
+class="btn full-btn">
+
+Proceed to Checkout
+
+</a>
+
+<a href="index.html#books"
+class="continue-shopping">
+
+← Continue Shopping
+
+</a>
+
+</aside>
+
+</div>
+
+</main>
+
+
+<div id="toast"></div>
+
+
+<script type="module">
+
+import {
+    getCart,
+    changeQuantity,
+    removeFromCart,
+    getCartTotal
+} from "./js/cart.js";
+
+
+const container =
+    document.getElementById(
+        "cartItems"
+    );
+
+
+function renderCart() {
+
+    const cart =
+        getCart();
+
+    if (!cart.length) {
+
+        container.innerHTML = `
+
+        <div class="empty-cart">
+
+            <i class="fa-solid fa-bag-shopping"></i>
+
+            <h2>Your cart is empty</h2>
+
+            <p>
+                Looks like you haven't added
+                any books yet.
+            </p>
+
+            <a href="index.html#books"
+               class="btn">
+
+                Discover Books
+
+            </a>
+
+        </div>
+
+        `;
+
+    } else {
+
+        container.innerHTML =
+            cart.map(item => `
+
+            <article class="cart-card">
+
+                <img
+                src="${item.image}"
+                onerror="this.src='https://placehold.co/150x200/f0eadf/171613?text=Book'">
+
+                <div class="cart-info">
+
+                    <h3>
+                        ${item.title}
+                    </h3>
+
+                    <p>
+                        ${item.author}
+                    </p>
+
+                    <strong>
+                        ₹${item.price}
+                    </strong>
+
+                </div>
+
+
+                <div class="quantity">
+
+                    <button
+                    data-minus="${item.id}">
+                        −
+                    </button>
+
+                    <span>
+                        ${item.quantity}
+                    </span>
+
+                    <button
+                    data-plus="${item.id}">
+                        +
+                    </button>
+
+                </div>
+
+
+                <button
+                class="remove-item"
+                data-remove="${item.id}">
+
+                    <i class="fa-solid fa-trash"></i>
+
+                </button>
+
+            </article>
+
+            `).join("");
+
+
+        document
+            .querySelectorAll("[data-minus]")
+            .forEach(button => {
+
+                button.onclick = () => {
+
+                    changeQuantity(
+                        button.dataset.minus,
+                        -1
+                    );
+
+                    renderCart();
+
+                };
+
+            });
+
+
+        document
+            .querySelectorAll("[data-plus]")
+            .forEach(button => {
+
+                button.onclick = () => {
+
+                    changeQuantity(
+                        button.dataset.plus,
+                        1
+                    );
+
+                    renderCart();
+
+                };
+
+            });
+
+
+        document
+            .querySelectorAll("[data-remove]")
+            .forEach(button => {
+
+                button.onclick = () => {
+
+                    removeFromCart(
+                        button.dataset.remove
+                    );
+
+                    renderCart();
+
+                };
+
+            });
+
+    }
+
+
+    const total =
+        getCartTotal();
+
+    document.getElementById(
+        "subtotal"
+    ).textContent =
+        `₹${total}`;
+
+    document.getElementById(
+        "total"
+    ).textContent =
+        `₹${total}`;
+
+}
+
+
+renderCart();
+
+</script>
+
+</body>
+</html>

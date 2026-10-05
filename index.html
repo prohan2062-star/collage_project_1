@@ -1,0 +1,622 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0">
+
+<title>BookNest — Online Bookstore</title>
+
+<link
+    rel="preconnect"
+    href="https://fonts.googleapis.com">
+
+<link
+    rel="preconnect"
+    href="https://fonts.gstatic.com"
+    crossorigin>
+
+<link
+    href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@500;600;700&display=swap"
+    rel="stylesheet">
+
+<link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+<link rel="stylesheet" href="css/style.css">
+
+</head>
+
+<body>
+
+<header class="header">
+
+    <a href="index.html" class="logo">
+        <i class="fa-solid fa-book-open"></i>
+        BookNest
+    </a>
+
+    <nav class="navbar" id="navbar">
+
+        <a href="index.html">Home</a>
+        <a href="#books">Books</a>
+        <a href="#categories">Categories</a>
+        <a href="#bestsellers">Best Sellers</a>
+
+    </nav>
+
+    <div class="header-actions">
+
+        <a href="login.html"
+           class="login-link icon-btn">
+
+            <i class="fa-regular fa-user"></i>
+
+        </a>
+
+        <a href="cart.html" class="icon-btn">
+
+            <i class="fa-solid fa-bag-shopping"></i>
+
+            <span class="cart-count">0</span>
+
+        </a>
+
+        <button id="menuBtn" class="menu-btn">
+
+            <i class="fa-solid fa-bars"></i>
+
+        </button>
+
+    </div>
+
+</header>
+
+
+<main>
+
+<section class="hero">
+
+    <div class="hero-content">
+
+        <span class="eyebrow">
+            YOUR NEXT GREAT READ
+        </span>
+
+        <h1>
+            Stories that
+            <em>stay with you.</em>
+        </h1>
+
+        <p>
+            Discover books that inspire,
+            educate and entertain.
+            Your next favorite story is waiting.
+        </p>
+
+        <div class="hero-buttons">
+
+            <a href="#books" class="btn">
+                Explore Books
+                <i class="fa-solid fa-arrow-right"></i>
+            </a>
+
+            <a href="#categories"
+               class="text-btn">
+                Browse Categories
+            </a>
+
+        </div>
+
+    </div>
+
+
+    <div class="hero-visual">
+
+        <div class="floating-book book-a">
+            <span>THE</span>
+            <strong>POWER</strong>
+            <strong>OF</strong>
+            <strong>WORDS</strong>
+        </div>
+
+        <div class="floating-book book-b">
+            <span>BUILD</span>
+            <strong>YOUR</strong>
+            <strong>FUTURE</strong>
+        </div>
+
+        <div class="floating-book book-c">
+            <span>THE</span>
+            <strong>ART OF</strong>
+            <strong>THINKING</strong>
+        </div>
+
+    </div>
+
+</section>
+
+
+<section class="search-section">
+
+    <div class="search-box">
+
+        <i class="fa-solid fa-magnifying-glass"></i>
+
+        <input
+            id="searchInput"
+            type="text"
+            placeholder="Search books, authors or categories...">
+
+    </div>
+
+</section>
+
+
+<section class="section" id="categories">
+
+    <div class="section-heading">
+
+        <div>
+            <span class="eyebrow">
+                EXPLORE
+            </span>
+
+            <h2>
+                Browse by
+                <em>Category</em>
+            </h2>
+        </div>
+
+    </div>
+
+
+    <div class="category-grid">
+
+        <button class="category-card"
+                data-category="Technology">
+
+            <i class="fa-solid fa-code"></i>
+
+            <h3>Technology</h3>
+
+            <span>Programming & Tech</span>
+
+        </button>
+
+
+        <button class="category-card"
+                data-category="Self Development">
+
+            <i class="fa-solid fa-brain"></i>
+
+            <h3>Self Development</h3>
+
+            <span>Personal Growth</span>
+
+        </button>
+
+
+        <button class="category-card"
+                data-category="Business">
+
+            <i class="fa-solid fa-chart-line"></i>
+
+            <h3>Business</h3>
+
+            <span>Money & Strategy</span>
+
+        </button>
+
+
+        <button class="category-card"
+                data-category="Science">
+
+            <i class="fa-solid fa-flask"></i>
+
+            <h3>Science</h3>
+
+            <span>Discover & Learn</span>
+
+        </button>
+
+
+        <button class="category-card"
+                data-category="Fiction">
+
+            <i class="fa-solid fa-feather"></i>
+
+            <h3>Fiction</h3>
+
+            <span>Stories & Novels</span>
+
+        </button>
+
+    </div>
+
+</section>
+
+
+<section class="section books-section" id="books">
+
+    <div class="section-heading">
+
+        <div>
+
+            <span class="eyebrow">
+                OUR COLLECTION
+            </span>
+
+            <h2>
+                Featured
+                <em>Books</em>
+            </h2>
+
+        </div>
+
+        <select id="sortBooks">
+
+            <option value="default">
+                Sort Books
+            </option>
+
+            <option value="low">
+                Price: Low to High
+            </option>
+
+            <option value="high">
+                Price: High to Low
+            </option>
+
+        </select>
+
+    </div>
+
+
+    <div class="book-grid" id="bookGrid">
+
+        <div class="loading">
+            Loading books...
+        </div>
+
+    </div>
+
+</section>
+
+
+<section class="promo" id="bestsellers">
+
+    <div>
+
+        <span class="eyebrow">
+            READERS' FAVORITES
+        </span>
+
+        <h2>
+            Books people
+            <br>
+            <em>can't put down.</em>
+        </h2>
+
+        <p>
+            Find stories and ideas loved by
+            thousands of readers.
+        </p>
+
+        <a href="#books" class="btn">
+            Explore Collection
+        </a>
+
+    </div>
+
+</section>
+
+
+<section class="newsletter">
+
+    <div>
+
+        <span class="eyebrow">
+            BOOKNEST COMMUNITY
+        </span>
+
+        <h2>
+            Never miss a good story.
+        </h2>
+
+    </div>
+
+    <form id="newsletterForm">
+
+        <input
+            type="email"
+            placeholder="Your email address"
+            required>
+
+        <button class="btn">
+            Subscribe
+        </button>
+
+    </form>
+
+</section>
+
+</main>
+
+
+<footer>
+
+    <div class="footer-grid">
+
+        <div>
+
+            <a href="index.html" class="logo">
+                <i class="fa-solid fa-book-open"></i>
+                BookNest
+            </a>
+
+            <p>
+                A modern online bookstore
+                for curious minds and
+                passionate readers.
+            </p>
+
+        </div>
+
+        <div>
+
+            <h4>Explore</h4>
+
+            <a href="#books">Books</a>
+            <a href="#categories">Categories</a>
+            <a href="#bestsellers">Best Sellers</a>
+
+        </div>
+
+        <div>
+
+            <h4>Account</h4>
+
+            <a href="login.html">Login</a>
+            <a href="cart.html">Cart</a>
+            <a href="checkout.html">Checkout</a>
+
+        </div>
+
+    </div>
+
+    <div class="footer-bottom">
+
+        © 2026 BookNest. All rights reserved.
+
+    </div>
+
+</footer>
+
+
+<div id="toast"></div>
+
+
+<script type="module">
+
+import {
+    getBooks,
+    bookCard
+} from "./js/books.js";
+
+import {
+    addToCart
+} from "./js/cart.js";
+
+
+let books = [];
+
+const grid =
+    document.getElementById("bookGrid");
+
+
+// Load books
+
+books = await getBooks();
+
+renderBooks(books);
+
+
+// Render
+
+function renderBooks(list) {
+
+    if (!list.length) {
+
+        grid.innerHTML =
+            `<div class="empty">
+                No books found.
+             </div>`;
+
+        return;
+    }
+
+    grid.innerHTML =
+        list.map(bookCard).join("");
+
+    attachCartButtons();
+
+}
+
+
+// Add cart buttons
+
+function attachCartButtons() {
+
+    document
+        .querySelectorAll(".add-cart")
+        .forEach(button => {
+
+            button.addEventListener(
+                "click",
+                () => {
+
+                    const book =
+                        books.find(
+                            b => b.id === button.dataset.id
+                        );
+
+                    if (book) {
+                        addToCart(book);
+                    }
+
+                }
+            );
+
+        });
+
+}
+
+
+// Search
+
+document
+    .getElementById("searchInput")
+    .addEventListener("input", function () {
+
+        const query =
+            this.value.toLowerCase();
+
+        const filtered =
+            books.filter(book =>
+
+                book.title
+                    .toLowerCase()
+                    .includes(query)
+
+                ||
+
+                book.author
+                    .toLowerCase()
+                    .includes(query)
+
+                ||
+
+                book.category
+                    .toLowerCase()
+                    .includes(query)
+
+            );
+
+        renderBooks(filtered);
+
+    });
+
+
+// Category
+
+document
+    .querySelectorAll(".category-card")
+    .forEach(button => {
+
+        button.addEventListener(
+            "click",
+            () => {
+
+                const category =
+                    button.dataset.category;
+
+                const filtered =
+                    books.filter(
+                        book =>
+                            book.category === category
+                    );
+
+                renderBooks(filtered);
+
+                document
+                    .getElementById("books")
+                    .scrollIntoView({
+                        behavior: "smooth"
+                    });
+
+            }
+        );
+
+    });
+
+
+// Sorting
+
+document
+    .getElementById("sortBooks")
+    .addEventListener(
+        "change",
+        function () {
+
+            const sorted =
+                [...books];
+
+            if (this.value === "low") {
+
+                sorted.sort(
+                    (a, b) =>
+                        a.price - b.price
+                );
+
+            }
+
+            if (this.value === "high") {
+
+                sorted.sort(
+                    (a, b) =>
+                        b.price - a.price
+                );
+
+            }
+
+            renderBooks(sorted);
+
+        }
+    );
+
+
+// Mobile menu
+
+document
+    .getElementById("menuBtn")
+    .addEventListener(
+        "click",
+        () => {
+
+            document
+                .getElementById("navbar")
+                .classList.toggle("active");
+
+        }
+    );
+
+
+// Newsletter
+
+document
+    .getElementById("newsletterForm")
+    .addEventListener(
+        "submit",
+        e => {
+
+            e.preventDefault();
+
+            alert(
+                "Welcome to the BookNest community!"
+            );
+
+            e.target.reset();
+
+        }
+    );
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0">
+
+<title>Book Details — BookNest</title>
+
+<link
+href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@500;600;700&display=swap"
+rel="stylesheet">
+
+<link
+rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+<link rel="stylesheet"
+      href="css/style.css">
+
+</head>
+
+<body>
+
+<header class="header">
+
+<a href="index.html" class="logo">
+<i class="fa-solid fa-book-open"></i>
+BookNest
+</a>
+
+<nav class="navbar">
+
+<a href="index.html">Home</a>
+<a href="index.html#books">Books</a>
+<a href="index.html#categories">Categories</a>
+
+</nav>
+
+<div class="header-actions">
+
+<a href="login.html"
+class="login-link icon-btn">
+
+<i class="fa-regular fa-user"></i>
+
+</a>
+
+<a href="cart.html"
+class="icon-btn">
+
+<i class="fa-solid fa-bag-shopping"></i>
+
+<span class="cart-count">0</span>
+
+</a>
+
+</div>
+
+</header>
+
+
+<main class="details-page">
+
+<div id="bookDetails">
+
+<div class="loading">
+Loading book...
+</div>
+
+</div>
+
+</main>
+
+
+<div id="toast"></div>
+
+
+<script type="module">
+
+import {
+    getBookById
+} from "./js/books.js";
+
+import {
+    addToCart
+} from "./js/cart.js";
+
+
+const params =
+    new URLSearchParams(
+        window.location.search
+    );
+
+const id =
+    params.get("id");
+
+
+const container =
+    document.getElementById(
+        "bookDetails"
+    );
+
+
+if (!id) {
+
+    container.innerHTML =
+        `<div class="empty">
+            Book not found.
+         </div>`;
+
+} else {
+
+    const book =
+        await getBookById(id);
+
+    if (!book) {
+
+        container.innerHTML =
+            `<div class="empty">
+                Book not found.
+             </div>`;
+
+    } else {
+
+        container.innerHTML = `
+
+        <div class="details-image">
+
+            <img
+            src="${book.image}"
+            alt="${book.title}"
+            onerror="this.src='https://placehold.co/500x700/f0eadf/171613?text=Book'">
+
+        </div>
+
+        <div class="details-content">
+
+            <span class="eyebrow">
+                ${book.category}
+            </span>
+
+            <h1>
+                ${book.title}
+            </h1>
+
+            <p class="details-author">
+                By ${book.author}
+            </p>
+
+            <div class="rating large">
+                ★★★★★
+                <span>${book.rating} / 5</span>
+            </div>
+
+            <p class="details-description">
+                ${book.description}
+            </p>
+
+            <div class="details-price">
+
+                <strong>
+                    ₹${book.price}
+                </strong>
+
+                <del>
+                    ₹${book.oldPrice}
+                </del>
+
+                <span>
+                    ${Math.round(
+                        ((book.oldPrice - book.price)
+                        / book.oldPrice) * 100
+                    )}% OFF
+                </span>
+
+            </div>
+
+            <div class="details-actions">
+
+                <button
+                    id="addButton"
+                    class="btn">
+
+                    <i class="fa-solid fa-bag-shopping"></i>
+
+                    Add to Cart
+
+                </button>
+
+                <a href="cart.html"
+                   class="secondary-btn">
+
+                    View Cart
+
+                </a>
+
+            </div>
+
+            <div class="book-meta">
+
+                <div>
+                    <i class="fa-solid fa-truck"></i>
+                    Free delivery
+                </div>
+
+                <div>
+                    <i class="fa-solid fa-shield-halved"></i>
+                    Secure checkout
+                </div>
+
+                <div>
+                    <i class="fa-solid fa-rotate-left"></i>
+                    Easy returns
+                </div>
+
+            </div>
+
+        </div>
+
+        `;
+
+
+        document
+            .getElementById("addButton")
+            .addEventListener(
+                "click",
+                () => addToCart(book)
+            );
+
+    }
+
+}
+
+</script>
+
+</body>
+</html> 

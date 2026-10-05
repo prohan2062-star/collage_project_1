@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0">
+
+<title>Checkout — BookNest</title>
+
+<link
+href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@500;600;700&display=swap"
+rel="stylesheet">
+
+<link
+rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+<link rel="stylesheet"
+href="css/style.css">
+
+</head>
+
+<body>
+
+<header class="header">
+
+<a href="index.html" class="logo">
+
+<i class="fa-solid fa-book-open"></i>
+
+BookNest
+
+</a>
+
+<a href="cart.html"
+class="secondary-btn">
+
+← Back to Cart
+
+</a>
+
+</header>
+
+
+<main class="checkout-page">
+
+<div class="page-title">
+
+<span class="eyebrow">
+SECURE CHECKOUT
+</span>
+
+<h1>
+Complete Your <em>Order</em>
+</h1>
+
+</div>
+
+
+<div class="checkout-layout">
+
+
+<form id="checkoutForm"
+class="checkout-form">
+
+<h2>
+Delivery Information
+</h2>
+
+
+<label>
+Full Name
+
+<input
+type="text"
+id="fullName"
+required
+placeholder="Enter your name">
+
+</label>
+
+
+<label>
+Phone Number
+
+<input
+type="tel"
+id="phone"
+required
+placeholder="Enter phone number">
+
+</label>
+
+
+<label>
+Address
+
+<textarea
+id="address"
+required
+placeholder="House / Street / Area"></textarea>
+
+</label>
+
+
+<div class="two-inputs">
+
+<label>
+
+City
+
+<input
+type="text"
+id="city"
+required>
+
+</label>
+
+
+<label>
+
+PIN Code
+
+<input
+type="text"
+id="pincode"
+required
+maxlength="6">
+
+</label>
+
+</div>
+
+
+<h2>
+Payment Method
+</h2>
+
+
+<label class="payment-option">
+
+<input
+type="radio"
+name="payment"
+value="Cash on Delivery"
+checked>
+
+<div>
+
+<strong>
+Cash on Delivery
+</strong>
+
+<span>
+Pay when your order arrives.
+</span>
+
+</div>
+
+</label>
+
+
+<label class="payment-option">
+
+<input
+type="radio"
+name="payment"
+value="UPI">
+
+<div>
+
+<strong>
+UPI
+</strong>
+
+<span>
+UPI payment integration can be
+connected later.
+</span>
+
+</div>
+
+</label>
+
+
+<button
+type="submit"
+class="btn full-btn">
+
+Place Order
+
+<i class="fa-solid fa-arrow-right"></i>
+
+</button>
+
+</form>
+
+
+<aside class="checkout-summary">
+
+<h2>
+Order Summary
+</h2>
+
+<div id="checkoutItems"></div>
+
+<hr>
+
+<div class="summary-total">
+
+<span>Total</span>
+
+<strong id="checkoutTotal">
+₹0
+</strong>
+
+</div>
+
+</aside>
+
+
+</div>
+
+</main>
+
+
+<script type="module">
+
+import {
+    getCart,
+    getCartTotal
+} from "./js/cart.js";
+
+
+const cart =
+    getCart();
+
+
+const items =
+    document.getElementById(
+        "checkoutItems"
+    );
+
+
+items.innerHTML =
+    cart.map(item => `
+
+        <div class="checkout-item">
+
+            <span>
+                ${item.title}
+                × ${item.quantity}
+            </span>
+
+            <strong>
+                ₹${item.price * item.quantity}
+            </strong>
+
+        </div>
+
+    `).join("");
+
+
+document.getElementById(
+    "checkoutTotal"
+).textContent =
+    `₹${getCartTotal()}`;
+
+</script>
+
+
+<script type="module"
+src="js/checkout.js"></script>
+
+</body>
+</html>

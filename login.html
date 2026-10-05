@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0">
+
+<title>Login — BookNest</title>
+
+<link
+href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@500;600;700&display=swap"
+rel="stylesheet">
+
+<link
+rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+<link rel="stylesheet"
+href="css/style.css">
+
+</head>
+
+<body class="auth-page">
+
+
+<div class="auth-container">
+
+
+<div class="auth-brand">
+
+<a href="index.html"
+class="logo">
+
+<i class="fa-solid fa-book-open"></i>
+
+BookNest
+
+</a>
+
+<h1>
+Welcome back.
+</h1>
+
+<p>
+Your next great read is
+only a few clicks away.
+</p>
+
+</div>
+
+
+<div class="auth-box">
+
+
+<div class="auth-tabs">
+
+<button
+class="auth-tab active"
+data-target="loginPanel">
+
+Login
+
+</button>
+
+<button
+class="auth-tab"
+data-target="registerPanel">
+
+Create Account
+
+</button>
+
+</div>
+
+
+<!-- LOGIN -->
+
+<div id="loginPanel"
+class="auth-panel active">
+
+<form id="loginForm">
+
+<label>
+
+Email
+
+<input
+type="email"
+id="loginEmail"
+required
+placeholder="you@example.com">
+
+</label>
+
+
+<label>
+
+Password
+
+<input
+type="password"
+id="loginPassword"
+required
+placeholder="Your password">
+
+</label>
+
+
+<button
+class="btn full-btn"
+type="submit">
+
+Sign In
+
+</button>
+
+
+<p id="loginMessage"
+class="form-message"></p>
+
+</form>
+
+</div>
+
+
+<!-- REGISTER -->
+
+<div id="registerPanel"
+class="auth-panel">
+
+<form id="registerForm">
+
+<label>
+
+Full Name
+
+<input
+type="text"
+id="registerName"
+required
+placeholder="Your name">
+
+</label>
+
+
+<label>
+
+Email
+
+<input
+type="email"
+id="registerEmail"
+required
+placeholder="you@example.com">
+
+</label>
+
+
+<label>
+
+Password
+
+<input
+type="password"
+id="registerPassword"
+required
+placeholder="Minimum 6 characters">
+
+</label>
+
+
+<label>
+
+Confirm Password
+
+<input
+type="password"
+id="confirmPassword"
+required
+placeholder="Repeat password">
+
+</label>
+
+
+<button
+class="btn full-btn"
+type="submit">
+
+Create Account
+
+</button>
+
+
+<p id="registerMessage"
+class="form-message"></p>
+
+</form>
+
+</div>
+
+
+<a href="index.html"
+class="back-home">
+
+← Back to BookNest
+
+</a>
+
+</div>
+
+</div>
+
+
+<script>
+
+const tabs =
+document.querySelectorAll(".auth-tab");
+
+const panels =
+document.querySelectorAll(".auth-panel");
+
+
+tabs.forEach(tab => {
+
+    tab.addEventListener("click", () => {
+
+        tabs.forEach(t =>
+            t.classList.remove("active")
+        );
+
+        panels.forEach(p =>
+            p.classList.remove("active")
+        );
+
+        tab.classList.add("active");
+
+        document
+            .getElementById(tab.dataset.target)
+            .classList.add("active");
+
+    });
+
+});
+
+</script>
+
+
+<script type="module"
+src="js/auth.js"></script>
+
+</body>
+</html>
